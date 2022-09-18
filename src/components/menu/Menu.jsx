@@ -2,8 +2,8 @@ import { Component } from 'react'
 import MenuItem from '../menu-item/MenuItem'
 import './menu.styles.scss'
 class Menu extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props);
     this.state = {
       sections: [
         {

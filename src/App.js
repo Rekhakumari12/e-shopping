@@ -4,18 +4,43 @@ import Homepage from './pages/homepage/Homepage';
 import Shoppage from './pages/shop/Shop';
 import Header from './components/header/Header';
 import Auth from './pages/auth/Auth';
-function App() {
+import { Component } from 'react';
+import { auth } from './firebase/firebase.utils';
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      currentUser: null
+    }
+  }
 
-  return (
-    <div>
-      <Header />
-      <Routes>
-        <Route exact path='/' element={<Homepage />} />
-        <Route path='/shop' element={<Shoppage />} />
-        <Route path='/signin' element={<Auth />} />
-      </Routes>
-    </div>
-  );
+  unSubscribeFromAuth = null
+
+  componentDidMount() {
+    //auth.onAuthStateChanged always be open as long as our application is open 
+    this.unSubscribeFromAuth = auth.onAuthStateChanged((user) => {
+      // to access email - user.multiFactor.user.email 
+      this.setState({ currentUser: user })
+    })
+  }
+
+  componentWillUnmount() {
+    //this will close the onAuthSateChange method on unMount
+    this.unSubscribeFromAuth()
+  }
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser} />
+        <Routes>
+          <Route exact path='/' element={<Homepage />} />
+          <Route path='/shop' element={<Shoppage />} />
+          <Route path='/signin' element={<Auth />} />
+        </Routes>
+      </div>
+    );
+  }
+
 }
 
 export default App;

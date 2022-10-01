@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { signInWithGoogle } from "../../firebase/firebase.utils";
 import Button from "../button/Button";
 import FormInput from "../form-input/FormInput";
 import './sign-in.style.scss'
@@ -27,7 +28,10 @@ export default class SignIn extends Component {
         <form onSubmit={this.handleSubmit}>
           <FormInput name="email" type="email" value={email} required id="email" handleChange={this.handleChange} label="Email" />
           <FormInput name="password" type="password" value={password} required id="password" handleChange={this.handleChange} label="Password" />
-          <Button type="submit" >Sign In </Button>
+          <dov className='buttons'>
+            <Button type="submit" >Sign In </Button>
+            <Button onClick={signInWithGoogle} isGoogleSignIn>Sign In with Google </Button>
+          </dov>
         </form>
       </div>
     );

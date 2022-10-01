@@ -19,7 +19,7 @@ firebase.initializeApp(firebaseConfig)
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
-/* ------------------ store data in firebase starts------------------ */
+/* ------------------ 1. store data in firebase starts------------------ */
 
 //userAuth - object we got from firebase when user sign in
 export const createUserProfileDocument = async (userAuth, additionalData) => {

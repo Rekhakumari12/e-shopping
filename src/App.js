@@ -18,11 +18,23 @@ class App extends Component {
 
   componentDidMount() {
     //auth.onAuthStateChanged always be open as long as our application is open 
-    this.unSubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      // to access email - user.multiFactor.user.email 
-      // this.setState({ currentUser: user }) 
-      await createUserProfileDocument(user)
-      // console.log(user)
+    this.unSubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      /* ------------------ 2. store data in state of application starts------------------ */
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          })
+        })
+      }
+      else {
+        this.setState({ currentUser: userAuth })
+      }
+      /* ------------------ 2. store data in state of application ends------------------ */
     })
   }
 

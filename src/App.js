@@ -5,7 +5,7 @@ import Shoppage from './pages/shop/Shop';
 import Header from './components/header/Header';
 import Auth from './pages/auth/Auth';
 import { Component } from 'react';
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 class App extends Component {
   constructor() {
     super()
@@ -18,9 +18,11 @@ class App extends Component {
 
   componentDidMount() {
     //auth.onAuthStateChanged always be open as long as our application is open 
-    this.unSubscribeFromAuth = auth.onAuthStateChanged((user) => {
+    this.unSubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       // to access email - user.multiFactor.user.email 
-      this.setState({ currentUser: user })
+      // this.setState({ currentUser: user }) 
+      await createUserProfileDocument(user)
+      // console.log(user)
     })
   }
 

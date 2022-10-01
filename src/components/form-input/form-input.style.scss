@@ -1,7 +1,7 @@
 $sub-color: grey;
 $main-color: black;
 // @mixin - to create varible for styling
-// @include - to access style
+// @include - to access style created by mixin
 @mixin shrinkLabel {
   top: -14px;
   font-size: 12px;

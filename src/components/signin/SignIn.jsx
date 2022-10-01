@@ -28,10 +28,10 @@ export default class SignIn extends Component {
         <form onSubmit={this.handleSubmit}>
           <FormInput name="email" type="email" value={email} required id="email" handleChange={this.handleChange} label="Email" />
           <FormInput name="password" type="password" value={password} required id="password" handleChange={this.handleChange} label="Password" />
-          <dov className='buttons'>
+          <div className='buttons'>
             <Button type="submit" >Sign In </Button>
             <Button onClick={signInWithGoogle} isGoogleSignIn>Sign In with Google </Button>
-          </dov>
+          </div>
         </form>
       </div>
     );

@@ -24,6 +24,8 @@ class SignUp extends Component {
     }
 
     try {
+      //after enabling google email and password as signin method we can use like this
+      //it will return me user after authorizing it(if it wont exist create it, if exist then give error)
       const { user } = await auth.createUserWithEmailAndPassword(email, password)
       await createUserProfileDocument(user, { displayName })
       this.setState({
@@ -35,13 +37,13 @@ class SignUp extends Component {
     }
     catch (error) {
       console.log('error while creating user', error.message)
+      alert(error.message)
     }
 
   }
 
   handleChange = (e) => {
     const { name, value } = e.target
-    console.log(name, value)
     this.setState({ [name]: value })
   }
 

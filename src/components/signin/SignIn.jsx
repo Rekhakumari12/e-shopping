@@ -10,6 +10,7 @@ export default class SignIn extends Component {
     this.state = {
       email: "",
       password: "",
+      error: ''
     };
   }
   handleSubmit = async (e) => {
@@ -19,7 +20,6 @@ export default class SignIn extends Component {
       const { user } = await auth.signInWithEmailAndPassword(email, password)
       await createUserProfileDocument(user)
     } catch (e) {
-      console.log("error", e)
       alert(e)
     }
     this.setState({ email: '', password: '' })
@@ -29,7 +29,7 @@ export default class SignIn extends Component {
     this.setState({ [name]: value })
   }
   render() {
-    const { email, password } = this.state
+    const { email, password, error } = this.state
     return (
       <div className="sign-in">
         <h2>I already have an account</h2>
@@ -37,6 +37,7 @@ export default class SignIn extends Component {
         <form onSubmit={this.handleSubmit}>
           <FormInput name="email" type="email" value={email} required id="email" handleChange={this.handleChange} label="Email" />
           <FormInput name="password" type="password" value={password} required id="password" handleChange={this.handleChange} label="Password" />
+          {error && <span className="error">{error}</span>}
           <div className='buttons'>
             <Button type="submit" >Sign In </Button>
             <Button onClick={signInWithGoogle} isGoogleSignIn>Sign In with Google </Button>

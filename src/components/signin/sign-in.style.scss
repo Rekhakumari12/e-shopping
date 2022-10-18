@@ -3,7 +3,13 @@
   display: flex;
   flex-direction: column;
 }
+.error {
+  font-size: 12px;
+  font-weight: bold;
+  color: #a70000;
+}
 .buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
 }
